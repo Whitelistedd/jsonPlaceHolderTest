@@ -1,3 +1,4 @@
+import React from 'react'
 import Svg, { Defs, Image, Pattern, Rect, Use } from 'react-native-svg'
 
 export const Logo = () => {

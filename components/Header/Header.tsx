@@ -1,11 +1,6 @@
 import { DeviceType } from 'expo-device'
-import {
-  Platform,
-  StyleSheet,
-  TouchableOpacity,
-  View,
-  ViewProps,
-} from 'react-native'
+import React from 'react'
+import { Platform, StyleSheet, TouchableOpacity, View } from 'react-native'
 import { FullLogo } from '../../assets/images/FullLogo'
 import { Logo } from '../../assets/images/Logo'
 import { Logout } from '../../assets/images/Logout'
@@ -23,9 +18,7 @@ export const Header: React.FC<HeaderProps> = ({ route }) => {
 
   return (
     <View style={styles.container}>
-      <>
-        {route.name === 'Login' || !DeviceType.PHONE ? <Logo /> : <FullLogo />}
-      </>
+      {DeviceType.PHONE ? <Logo /> : <FullLogo />}
       {loggedIn && (
         <TouchableOpacity onPress={() => handleLogoutButton()}>
           <Logout color={'#27569C'} />

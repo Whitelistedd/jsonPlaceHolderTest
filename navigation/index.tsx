@@ -1,12 +1,13 @@
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import { useEffect } from 'react'
-import { AppDispatch, useAppSelector } from '../redux/Store/Store'
+import { useAppSelector } from '../redux/Store/Store'
 
 import NotFoundScreen from '../screens/NotFoundScreen/NotFoundScreen'
 import Login from '../screens/Login/Login'
 import Home from '../screens/Home/Home'
 import { Header } from '../components/Header/Header'
+import React from 'react'
+import { SafeAreaView } from 'react-native'
 
 const Stack = createNativeStackNavigator()
 
@@ -17,7 +18,11 @@ export default function Navigation() {
     <NavigationContainer>
       <Stack.Navigator
         screenOptions={{
-          header: ({ route }) => <Header route={route} />,
+          header: ({ route }) => (
+            <SafeAreaView style={{ backgroundColor: '#E4B062' }}>
+              <Header route={route} />
+            </SafeAreaView>
+          ),
         }}
         initialRouteName={loggedIn ? 'Home' : 'Login'}
       >

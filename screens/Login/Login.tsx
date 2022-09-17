@@ -1,4 +1,5 @@
 import {
+  Dimensions,
   StyleSheet,
   Text,
   TextInput,
@@ -10,7 +11,9 @@ import { handleLogin } from '../../redux/Slices/UserSlice/UserSlice'
 import { colors } from '../../assets/colors'
 import { useEffect, useState } from 'react'
 import { LoginProps } from './Login.model'
-import { DeviceType } from 'expo-device'
+import React from 'react'
+
+const { width, height } = Dimensions.get('window')
 
 const Login: React.FC<LoginProps> = ({ navigation }) => {
   const [form, setForm] = useState({})
@@ -71,7 +74,6 @@ const Login: React.FC<LoginProps> = ({ navigation }) => {
           <Text style={styles.loginText}>Submit</Text>
         </TouchableOpacity>
       </View>
-      <View style={styles.separator} />
     </View>
   )
 }
@@ -82,57 +84,55 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'white',
     justifyContent: 'center',
+    padding: 15,
   },
   title: {
     fontSize: 24,
+    padding: 10,
     fontWeight: 'bold',
     color: colors.blueWater,
     marginBottom: 'auto',
     marginTop: 'auto',
     fontFamily: 'inherit',
   },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
-  },
   form: {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    border: `5px solid ${colors.blueWater}`,
+    borderColor: colors.blueWater,
+    borderWidth: 5,
     borderRadius: 6,
-    minWidth: DeviceType.PHONE ? 290 : 480,
+    padding: 20,
+    MaxWidth: 480,
     fontFamily: 'InterStrong',
-    height: 330,
+    minHeight: 330,
   },
   inputWrap: {
     display: 'flex',
-    flexDirection: DeviceType.PHONE ? 'column' : 'row',
+    flexDirection: width > 492 ? 'row' : 'column',
+    alignItems: width > 492 ? 'center' : 'flex-start',
     justifyContent: 'space-between',
     width: '100%',
-    alignItems: DeviceType.PHONE ? 'left' : 'center',
-    paddingHorizontal: 19,
-    marginBottom: 25,
+    marginBottom: 17,
   },
   input: {
-    minWidth: 295,
+    width: 275,
     height: 45,
     padding: 10,
-    border: `5px solid ${colors.blueWater}`,
+    borderColor: colors.blueWater,
+    borderWidth: 5,
     borderRadius: 10,
     backgroundColor: '#D9D9D9',
-    flex: 1,
   },
   label: {
-    flex: 1,
     fontWeight: '900',
     fontSize: 24,
+    marginBottom: 17,
     textAlign: 'left',
     fontFamily: 'inherit',
+    paddingRight: 20,
   },
   loginButton: {
-    marginBottom: 'auto',
     backgroundColor: colors.cream,
     paddingVertical: 12,
     paddingHorizontal: 65,

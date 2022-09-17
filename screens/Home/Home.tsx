@@ -1,20 +1,9 @@
-import { DeviceType } from 'expo-device'
+import React from 'react'
 import { useEffect, useState } from 'react'
-import {
-  Dimensions,
-  FlatList,
-  ListRenderItem,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native'
+import { FlatList, ListRenderItem, StyleSheet, View } from 'react-native'
 import { photoAPI, postAPI, userAPI } from '../../api/api'
 import { UserInfo } from '../../components/UserInfo/UserInfo'
 import { HomeProps, usersType } from './Home.model'
-
-const { height } = Dimensions.get('window')
 
 const Home: React.FC<HomeProps> = ({ navigation }) => {
   const [allPosts, setAllPosts] = useState<usersType[]>([])
@@ -63,12 +52,15 @@ const Home: React.FC<HomeProps> = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <FlatList
+        columnWrapperStyle={{
+          flexWrap: 'wrap',
+        }}
         style={styles.userInfos}
         refreshing={true}
         onRefresh={getUserPosts}
         data={allPosts}
         renderItem={renderItem}
-        numColumns={!DeviceType.PHONE ? 1 : 2}
+        numColumns={2}
       />
     </View>
   )

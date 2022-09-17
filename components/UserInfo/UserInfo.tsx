@@ -1,7 +1,10 @@
 import { DeviceType } from 'expo-device'
-import { Image, StyleSheet, Text, View } from 'react-native'
+import React from 'react'
+import { Dimensions, Image, StyleSheet, Text, View } from 'react-native'
 import { colors } from '../../assets/colors'
 import { UserInfoProps } from './UserInfo.model'
+
+const { width } = Dimensions.get('window')
 
 export const UserInfo: React.FC<UserInfoProps> = ({
   imageUrl,
@@ -12,13 +15,11 @@ export const UserInfo: React.FC<UserInfoProps> = ({
 }) => {
   return (
     <View style={styles.container}>
-      {!DeviceType.PHONE && (
-        <Image style={styles.image} source={{ uri: imageUrl }} />
-      )}
+      {width > 679 && <Image style={styles.image} source={{ uri: imageUrl }} />}
       <Text style={styles.textInfo}>Author: {author}</Text>
       <Text style={styles.textInfo}>Company: {company}</Text>
       <Text style={styles.textInfo}>Title: {title}</Text>
-      {!DeviceType.PHONE && (
+      {width > 679 && (
         <Text style={styles.textInfo}>{`${body.substring(0, 152)}...`}</Text>
       )}
     </View>

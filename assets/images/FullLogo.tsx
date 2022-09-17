@@ -1,3 +1,4 @@
+import React from 'react'
 import Svg, { Defs, Rect, Pattern, Use, Image } from 'react-native-svg'
 
 export const FullLogo = () => {

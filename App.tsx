@@ -7,6 +7,7 @@ import Navigation from './navigation'
 import { useFonts } from 'expo-font'
 import { useEffect } from 'react'
 import * as SplashScreen from 'expo-splash-screen'
+import React from 'react'
 
 export default function App() {
   const [fontsLoaded] = useFonts({
