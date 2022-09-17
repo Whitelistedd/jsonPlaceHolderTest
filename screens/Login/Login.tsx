@@ -1,5 +1,6 @@
 import {
   Dimensions,
+  KeyboardAvoidingView,
   StyleSheet,
   Text,
   TextInput,
@@ -44,36 +45,45 @@ const Login: React.FC<LoginProps> = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.form}>
-        <Text style={styles.title}>Authorization</Text>
-        <View style={styles.inputWrap}>
-          <Text style={styles.label}>login</Text>
-          <TextInput
-            onChangeText={(text) => handleFormInputChange(text, 'login')}
-            style={styles.input}
-          />
+      <KeyboardAvoidingView
+        style={{
+          height: height,
+          display: 'flex',
+          justifyContent: 'center',
+        }}
+        behavior="padding"
+      >
+        <View style={styles.form}>
+          <Text style={styles.title}>Authorization</Text>
+          <View style={styles.inputWrap}>
+            <Text style={styles.label}>login</Text>
+            <TextInput
+              onChangeText={(text) => handleFormInputChange(text, 'login')}
+              style={styles.input}
+            />
+          </View>
+          <View style={styles.inputWrap}>
+            <Text style={styles.label}>password</Text>
+            <TextInput
+              onChangeText={(text) => handleFormInputChange(text, 'password')}
+              style={styles.input}
+              textContentType="password"
+              secureTextEntry={true}
+            />
+          </View>
+          {error && (
+            <Text style={styles.errorText}>
+              Please check your password and login and try again.
+            </Text>
+          )}
+          <TouchableOpacity
+            style={styles.loginButton}
+            onPress={() => handleLoginButton()}
+          >
+            <Text style={styles.loginText}>Submit</Text>
+          </TouchableOpacity>
         </View>
-        <View style={styles.inputWrap}>
-          <Text style={styles.label}>password</Text>
-          <TextInput
-            onChangeText={(text) => handleFormInputChange(text, 'password')}
-            style={styles.input}
-            textContentType="password"
-            secureTextEntry={true}
-          />
-        </View>
-        {error && (
-          <Text style={styles.errorText}>
-            Please check your password and login and try again.
-          </Text>
-        )}
-        <TouchableOpacity
-          style={styles.loginButton}
-          onPress={() => handleLoginButton()}
-        >
-          <Text style={styles.loginText}>Submit</Text>
-        </TouchableOpacity>
-      </View>
+      </KeyboardAvoidingView>
     </View>
   )
 }
@@ -81,6 +91,7 @@ const Login: React.FC<LoginProps> = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    height: height,
     alignItems: 'center',
     backgroundColor: 'white',
     justifyContent: 'center',
