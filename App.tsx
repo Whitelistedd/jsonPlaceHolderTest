@@ -1,22 +1,37 @@
-import { StatusBar } from 'expo-status-bar';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { StatusBar } from 'expo-status-bar'
+import { SafeAreaProvider } from 'react-native-safe-area-context'
+import { Provider } from 'react-redux'
+import { store } from './redux/Store/Store'
 
-import useCachedResources from './hooks/useCachedResources';
-import useColorScheme from './hooks/useColorScheme';
-import Navigation from './navigation';
+import Navigation from './navigation'
+import { useFonts } from 'expo-font'
+import { useEffect } from 'react'
+import * as SplashScreen from 'expo-splash-screen'
 
 export default function App() {
-  const isLoadingComplete = useCachedResources();
-  const colorScheme = useColorScheme();
+  const [fontsLoaded] = useFonts({
+    InterStrong: require('./assets/fonts/Inter-ExtraBold.ttf'),
+    Inter: require('./assets/fonts/Inter.ttf'),
+  })
 
-  if (!isLoadingComplete) {
-    return null;
-  } else {
-    return (
+  useEffect(() => {
+    async function prepare() {
+      await SplashScreen.preventAutoHideAsync()
+    }
+
+    prepare()
+  }, [])
+
+  if (!fontsLoaded) {
+    return null
+  }
+
+  return (
+    <Provider store={store}>
       <SafeAreaProvider>
-        <Navigation colorScheme={colorScheme} />
+        <Navigation />
         <StatusBar />
       </SafeAreaProvider>
-    );
-  }
+    </Provider>
+  )
 }
